@@ -200,6 +200,31 @@ public class LinkedListTest extends student.TestCase {
         assertEquals(list.toString(), "[F, R, L, Q, H, I, Z, C]");
         list.remove(2);
         assertEquals(list.toString(), "[F, R, Q, H, I, Z, C]");
+        
+        Exception ex = null;
+        try {
+            list.remove(-1);
+        }
+        catch (Exception e) {
+            ex = e;
+        }
+        assertTrue(ex instanceof IndexOutOfBoundsException);
+        
+        try {
+            list.remove(200);
+        }
+        catch (Exception e) {
+            ex = e;
+        }
+        assertTrue(ex instanceof IndexOutOfBoundsException);
+        
+        assertTrue(list.remove("F"));
+        assertEquals(list.toString(), "[R, Q, H, I, Z, C]");
+        
+        assertTrue(list.remove("Z"));
+        assertEquals(list.toString(), "[R, Q, H, I, C]");
+        
+        assertFalse(list.remove("L"));   
     }
     
     public void testIterator() {
@@ -237,5 +262,26 @@ public class LinkedListTest extends student.TestCase {
         Object[] other = {"A","B","C"};
         
         assertTrue(Arrays.equals(list.toArray(), other));
+    }
+    
+    public void testContains() {
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        
+        assertTrue(list.contains("A"));
+        assertFalse(list.contains("F"));
+    }
+    
+    public void testToString() {
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        
+        assertEquals(list.toString(), "[A, B, C]");
+        
+        list.clear();
+        assertEquals(list.toString(), "[]");
+        
     }
 }

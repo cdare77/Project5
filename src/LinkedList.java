@@ -101,16 +101,23 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
      * false otherwise
      */
     public boolean remove(T obj) {
-        Node<T> temp = head;
-        while (temp.next != null) {
-            if (temp.next.equals(obj)) {
-                temp.next = temp.next.next;
-                size--;
-                return true;
-            }
+        if (head.data.equals(obj)) {
+            head = head.next;
+            size--;
+            return true;
         }
-        
-        return false;
+        else {
+            Node<T> temp = head;
+            while (temp.next != null) {
+                if (temp.next.data.equals(obj)) {
+                    temp.next = temp.next.next;
+                    size--;
+                    return true;
+                }
+                temp = temp.next;
+            }
+            return false;
+        }
     }
     
     /**
@@ -170,11 +177,11 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
         Node<T> temp = head;
         while (temp != null) {
             if (temp.data.equals(obj)) {
-                return false;
+                return true;
             }
             temp = temp.next;
         }
-        return true;
+        return false;
     }
     
     /**
