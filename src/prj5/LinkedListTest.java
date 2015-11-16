@@ -1,3 +1,4 @@
+package prj5;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -76,25 +77,6 @@ public class LinkedListTest extends student.TestCase {
         assertTrue(ex instanceof IllegalArgumentException);
     }
     
-    public void testSort() {
-        list.add("A");
-        list.add("F");
-        list.add("B");
-        list.add("R");
-        list.add("L");
-        list.add("Q");
-        list.add("H");
-        list.add("I");
-        list.add("Z");
-        list.add("C");
-        
-        assertEquals(list.toString(), "[A, F, B, R, L, Q, H, I, Z, C]");
-        
-        list.sort();
-        
-        assertEquals(list.toString(), "[A, B, C, F, H, I, L, Q, R, Z]");
-    }
-    
     /**
      * Tests the get method in cases after
      * sort, before sort, and pos = list.size-1
@@ -115,12 +97,7 @@ public class LinkedListTest extends student.TestCase {
         assertEquals(list.get(0), "A");
         assertEquals(list.get(list.size() - 1), "C");
         
-        list.sort();
-        
-        assertEquals(list.get(list.size() - 1), "Z");
-        
         Exception ex = null;
-        
         try {
             list.get(-2);
         }

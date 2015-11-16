@@ -1,3 +1,4 @@
+package prj5;
 import java.util.Iterator;
 
 /**
@@ -6,7 +7,7 @@ import java.util.Iterator;
  * @version 11/2/2015
  * @param <T>
  */
-public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
+public class LinkedList<T> implements Iterable<T> {
     protected Node<T> head;
     protected Node<T> last;
     protected int size;
@@ -200,62 +201,6 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
         return size == 0;
     }
     
-    /**
-     * mergeSort on list, uses helper methods
-     * mergeSort, midpoint, merge
-     */
-    public void sort() {
-        mergeSort(head);
-        Node<T> temp = head;
-        while (temp.next != null) {
-            temp = temp.next;
-        }
-        last = temp;
-    }
-    
-    private Node<T> mergeSort(Node<T> node) {
-        if (node == null || node.next == null) {
-            return node;
-        }
-        Node<T> middle = midpoint(node);
-        Node<T> secondHalf = middle.next;
-        middle.next = null;
-
-        return merge(mergeSort(node),mergeSort(secondHalf));
-    }
-
-    private Node<T> merge(Node<T> first, Node<T> second) {
-        Node<T> currentHead;
-        currentHead = new Node<T>(null, null);
-        Node<T> current = currentHead;
-        while (first !=null && second!= null) {
-            if(first.data.compareTo(second.data) <= 0) {
-                current.next = first;
-                first = first.next;
-            }
-            else {
-                current.next = second;
-                second = second.next;
-            }
-            current = current.next;
-        }
-        current.next = (first == null) ? second : first;
-        return currentHead.next;
-    }
-
-    private Node<T> midpoint(Node<T> node) {
-        if(node == null) {
-            return node;
-        }
-        Node<T> slow = node;
-        Node<T> fast = node;
-        while(fast.next != null && fast.next.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        return slow;
-    }
-    
     @Override
     public String toString() {
         if (isEmpty()) {
@@ -309,22 +254,6 @@ public class LinkedList<T extends Comparable<T>> implements Iterable<T> {
             index++;
         }
         return objects;
-    }
-    
-    /**
-     * nested inner node class
-     * @author Chris Dare cdare77
-     * @version 11/2/2015
-     * @param <E>
-     */
-    protected class Node<E> {
-        E data;
-        Node<E> next;
-        
-        Node(E data, Node<E> next) {
-            this.data = data;
-            this.next = next;
-        }
     }
     
 }

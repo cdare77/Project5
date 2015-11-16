@@ -1,11 +1,11 @@
-
+package prj5;
 /**
  * 
  * @author Chris Dare cdare77
  * @version 11/8/2105
  */
 @SuppressWarnings("unused")
-public class Song implements Comparable<Song> {
+public class Song implements MusicComparable<Song> {
     
     private String title;
     private String artist;
@@ -81,34 +81,21 @@ public class Song implements Comparable<Song> {
     public int getReleaseYear() {
         return releaseYear;
     }
-
-    @Override
-    public int compareTo(Song other) {
-        int compareTitle = title.compareTo(other.getTitle());
-        
-        if (compareTitle != 0) {
-            return compareTitle;
-        }
-        
-        int compareArtist = artist.compareTo(other.getArtist());
-        
-        if (compareArtist != 0) {
-            return compareArtist;
-        }
-        
-        int compareGenre = genre.compareTo(other.getGenre());
-        
-        if (compareGenre != 0) {
-            return compareGenre;
-        }
-        
-        int compareYear = releaseYear - other.releaseYear;
-        
-        if (compareYear != 0) {
-            return compareYear;
-        }
-        
-        return 0;
+    
+    public int compareByArtist(Song other) {
+        return artist.compareTo(other.getArtist());
+    }
+    
+    public int compareByTitle(Song other) {
+        return title.compareTo(other.getTitle());
+    }
+    
+    public int compareByGenre(Song other) {
+        return genre.compareTo(other.getGenre());
+    }
+    
+    public int compareByReleaseYear(Song other) {
+        return releaseYear - other.getReleaseYear();
     }
     
 }
