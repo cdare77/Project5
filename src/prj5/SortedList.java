@@ -11,60 +11,48 @@ public class SortedList<T extends MusicComparable<T>> extends LinkedList<T> {
     
     private String sortMethod;
     
+    /**
+     * default constructor
+     */
     public SortedList() {
-        sortMethod = null;
+        sortMethod = "title";
     }
     
+    /**
+     * adds an object at the specific position
+     * that keeps the order of sortMethod
+     * @param obj to add
+     */
     public void add(T obj) {
         if (isEmpty()) {
             super.add(obj);
         }
-        Node<T> temp = head;
-        int compare;
-        if (sortMethod.equals("artist")) {
-            compare = temp.next.data.compareByArtist(obj);
-        }
-        else if (sortMethod.equals("title")) {
-            compare = temp.next.data.compareByTitle(obj);
-        }
-        else if (sortMethod.equals("genre")) {
-            compare = temp.next.data.compareByGenre(obj);
-        }
-        else if (sortMethod.equals("releaseYear")) {
-            compare = temp.next.data.compareByReleaseYear(obj);
-        }
+        
         else {
-            throw new IllegalArgumentException("Argument not valid");
-        }
-        while (temp.next != null && compare <= 0) {
-            if (sortMethod.equals("artist")) {
-                compare = temp.next.data.compareByArtist(obj);
-            }
-            else if (sortMethod.equals("title")) {
-                compare = temp.next.data.compareByTitle(obj);
-            }
-            else if (sortMethod.equals("genre")) {
-                compare = temp.next.data.compareByGenre(obj);
-            }
-            else if (sortMethod.equals("releaseYear")) {
-                compare = temp.next.data.compareByReleaseYear(obj);
-            }
-            else {
-                throw new IllegalArgumentException();
+            Node<T> temp = head;
+            int counter = 0;
+            
+            while (temp != null) {
+                if (compare(temp.data, obj) > 0) {
+                    super.add(counter, obj);
+                    return;
+                }
+                temp = temp.next;
+                counter++;
             }
             
-            temp = temp.next;
+            super.add(obj);
         }
-        
-        temp.next = new Node<T>(obj, temp.next);
     }
+    
+    //----------------------------------------------------------------------
     
     /**
      * mergeSort on list, uses helper methods
      * mergeSort, midpoint, merge
      */
-    public void sort() {
-        mergeSort(head, sortMethod);
+    private void sort() {
+        head = mergeSort(head, sortMethod);
         Node<T> temp = head;
         while (temp.next != null) {
             temp = temp.next;
@@ -72,6 +60,14 @@ public class SortedList<T extends MusicComparable<T>> extends LinkedList<T> {
         last = temp;
     }
     
+    /**
+     * Helper method which splits linked list
+     * in O(log2n) time
+     * @param node to start at
+     * @param param passes method of sorting
+     * down the stack trace
+     * @return temporary head of reordered sublist
+     */
     private Node<T> mergeSort(Node<T> node, String param) {
         if (node == null || node.next == null) {
             return node;
@@ -80,30 +76,25 @@ public class SortedList<T extends MusicComparable<T>> extends LinkedList<T> {
         Node<T> secondHalf = middle.next;
         middle.next = null;
 
-        return merge(mergeSort(node, param),mergeSort(secondHalf, param), param);
+        return merge(mergeSort(node, param), mergeSort(secondHalf, param), param);
     }
 
+
+    /**
+     * merges the two lists in O(n) time
+     * @param first head of first list
+     * @param second head of second list
+     * @param param method of comparison passed
+     * down the call stack
+     * @return head of merged list
+     */
     private Node<T> merge(Node<T> first, Node<T> second, String param) {
         Node<T> currentHead;
         currentHead = new Node<T>(null, null);
         Node<T> current = currentHead;
-        while (first !=null && second!= null) {
-            int compare = 0;
-            if (param == "artist") {
-                compare = first.data.compareByArtist(second.data);
-            }
-            else if (param == "title") {
-                compare = first.data.compareByTitle(second.data);
-            }
-            else if (param == "genre") {
-                compare = first.data.compareByGenre(second.data);
-            }
-            else if (param == "releaseYear") {
-                compare = first.data.compareByReleaseYear(second.data);
-            }
-            else {
-                throw new IllegalArgumentException("Argument not valid");
-            }
+        while (first != null && second != null) {
+            int compare = compare(first.data, second.data);
+
             if(compare <= 0) {
                 current.next = first;
                 first = first.next;
@@ -118,6 +109,11 @@ public class SortedList<T extends MusicComparable<T>> extends LinkedList<T> {
         return currentHead.next;
     }
 
+    /**
+     * helper method which returns the midpoint node
+     * @param node beginning of list
+     * @return midpoint node of list
+     */
     private Node<T> midpoint(Node<T> node) {
         if(node == null) {
             return node;
@@ -131,23 +127,67 @@ public class SortedList<T extends MusicComparable<T>> extends LinkedList<T> {
         return slow;
     }
     
-    public void setSortMethod(String s) {
-        if (s.equalsIgnoreCase("artist")) {
+    /**
+     * sets the sorting method and sorts the list
+     * @param method to sort by, i.e. artist,
+     * title, genre, release year
+     */
+    public void setSortMethod(String method) {
+        if (method.equalsIgnoreCase("artist")) {
             sortMethod = "artist";
         }
-        else if (s.equalsIgnoreCase("genre")) {
+        else if (method.equalsIgnoreCase("genre")) {
             sortMethod = "genre";
         }
-        else if (s.equalsIgnoreCase("title")) {
+        else if (method.equalsIgnoreCase("title")) {
             sortMethod = "title";
         }
-        else if (s.equalsIgnoreCase("releaseYear")) {
+        else if (method.equalsIgnoreCase("releaseYear")) {
             sortMethod = "releaseYear";
         }
         else {
             throw new IllegalArgumentException();
         }
         
-        sort();
+        if (!isEmpty()) {
+            sort();
+        }
+    }
+    
+    /**
+     * compares the first and second parameters based
+     * off of current sorting method
+     * @param first object to compare
+     * @param second object to compare
+     * @return int of compareBy____
+     */
+    public int compare(T first, T second) {
+        int compare;
+           
+        if (sortMethod.equals("artist")) {
+            compare = first.compareByArtist(second);
+        }
+        else if (sortMethod.equals("title")) {
+            compare = first.compareByTitle(second);
+        }
+        else if (sortMethod.equals("genre")) {
+            compare = first.compareByGenre(second);
+        }
+        else if (sortMethod.equals("releaseYear")) {
+            compare = first.compareByReleaseYear(second);
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
+        
+        return compare;
+    }
+    
+    /**
+     * public accessor method for sortMethod
+     * @return sortMethod as string
+     */
+    public String getSortMethod() {
+        return sortMethod;
     }
 }
