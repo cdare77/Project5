@@ -5,6 +5,7 @@ import CS2114.Window;
 
 public class DataVisualizationWindow {
 
+    private SortedList<Song> list;
     private Window window;
     private Button sortByArtist;
     private Button sortByGenre;
@@ -17,11 +18,16 @@ public class DataVisualizationWindow {
     private Button repRegion;
     private Button quit;
     
+    private SongShape song1;
     
-    public DataVisualizationWindow() {
+    
+    public DataVisualizationWindow(SortedList<Song> list) {
+        this.list = list;
         window = new Window();
         window.setInfoText("Project 5");
         
         
+        song1 = new SongShape(window, 80, 50, list, list.get(0));
+
     }
 }

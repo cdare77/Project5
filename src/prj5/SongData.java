@@ -17,4 +17,13 @@ final class SongData implements Comparable<SongData> {
     public int compareTo(SongData other) {
         return listens + likes - (other.listens + other.likes);
     }
+    
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Listens: ");
+        builder.append(listens);
+        builder.append(", Likes: ");
+        builder.append(likes);
+        return builder.toString();
+    }
 }

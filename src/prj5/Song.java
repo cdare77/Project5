@@ -168,4 +168,20 @@ public class Song implements MusicComparable<Song> {
         return builder.toString();
     }
     
+    public SongData getRead() {
+        return read;
+    }
+    
+    public SongData getArt() {
+        return art;
+    }
+    
+    public SongData getSports() {
+        return sports;
+    }
+    
+    public SongData getMusic() {
+        return music;
+    }
+    
 }
