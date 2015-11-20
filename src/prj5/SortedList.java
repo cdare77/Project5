@@ -76,7 +76,8 @@ public class SortedList<T extends MusicComparable<T>> extends LinkedList<T> {
         Node<T> secondHalf = middle.next;
         middle.next = null;
 
-        return merge(mergeSort(node, param), mergeSort(secondHalf, param), param);
+        return merge(mergeSort(node, param),
+                mergeSort(secondHalf, param), param);
     }
 
 
@@ -95,7 +96,7 @@ public class SortedList<T extends MusicComparable<T>> extends LinkedList<T> {
         while (first != null && second != null) {
             int compare = compare(first.data, second.data);
 
-            if(compare <= 0) {
+            if (compare <= 0) {
                 current.next = first;
                 first = first.next;
             }
@@ -115,12 +116,12 @@ public class SortedList<T extends MusicComparable<T>> extends LinkedList<T> {
      * @return midpoint node of list
      */
     private Node<T> midpoint(Node<T> node) {
-        if(node == null) {
+        if (node == null) {
             return node;
         }
         Node<T> slow = node;
         Node<T> fast = node;
-        while(fast.next != null && fast.next.next != null) {
+        while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }

@@ -2,46 +2,84 @@ package prj5;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Iterator;
 import java.util.Scanner;
 
+/**
+ * Input class that reads from a specificed 
+ * command line file, SurveyData and SongList,
+ * or two given files by default
+ * @author Chris Dare cdare77
+ * @version 11/20/2015
+ */
 public class Input {
 
+    /**
+     * main method which instantiates files
+     * and calls static helper methods
+     * @param args -args[0] SurveyData args[1] 
+     * song list
+     */
     public static void main(String[] args) {
         SortedList<Song> list = null;
+        File songlist;
+        File surveyData;
+        
         if (args.length == 0) {
-            try {
-                list = parseFile(new File("SongList.csv"));
-            }
-            catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            songlist = new File("SongList.csv");
+            surveyData = new File("MusicSurveyData.csv");
+        }
+        else {
+            songlist = new File(args[1]);
+            surveyData = new File(args[0]);
         }
         
-        if (list != null) {
-            System.out.println(list.toString());
-        }
-        
-        for (Song song : list) {
-            song.setHobbyData(new SongData(0, 0),
-                    new SongData(0, 0), new SongData(0, 0),
-                    new SongData(0, 0));
-            song.setMajorData(new SongData(0, 0),
-                    new SongData(0, 0), new SongData(0, 0),
-                    new SongData(0, 0));
-            song.setRegionData(new SongData(0, 0),
-                    new SongData(0, 0), new SongData(0, 0),
-                    new SongData(0, 0));
-        }
         
         try {
-            parseData(new File("MusicSurveyData.csv"), list);
+            list = parseFile(songlist);
+                
+                
+            /*
+             * asserting songData is not null, but zeros
+             */
+            for (Song song : list) {
+                song.setHobbyData(new SongData(0, 0),
+                        new SongData(0, 0), new SongData(0, 0),
+                        new SongData(0, 0));                   
+                song.setMajorData(new SongData(0, 0),
+                        new SongData(0, 0), new SongData(0, 0),
+                        new SongData(0, 0));
+                song.setRegionData(new SongData(0, 0),
+                        new SongData(0, 0), new SongData(0, 0),
+                        new SongData(0, 0));
+            }
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+            
+        try {
+           parseData(surveyData, list);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         
+        printData(list);
+        list.setSortMethod("genre");
+        printData(list);
+        
+        @SuppressWarnings("unused")
+        DataVisualizationWindow window = new DataVisualizationWindow(list);
     }
     
+    /**
+     * Parses the SongList into a sorted list
+     * @param file -File to read from
+     * @return sortedList containing all elements
+     * from songList
+     * @throws FileNotFoundException
+     */
     public static SortedList<Song> parseFile(File file) throws FileNotFoundException {
         SortedList<Song> list = new SortedList<Song>();
         Scanner scan = new Scanner(file);
@@ -49,13 +87,24 @@ public class Input {
         while (scan.hasNextLine()) {
             String text = scan.nextLine();
             String[] values = text.split(",");
+            if (values.length < 3) {
+                continue;
+            }
             list.add(new Song(values[0], values[1],
-                    values[3], Integer.parseInt(values[2])));
+                    values[3],
+                    Integer.parseInt(values[2])));
         }
         scan.close();
         return list;
     }
     
+    /**
+     * parses each song and increments their respective
+     * Song Data
+     * @param file -SurveyData
+     * @param list -list of songs to iterate
+     * @throws FileNotFoundException
+     */
     public static void parseData(File file, SortedList<Song> list) throws FileNotFoundException {
         Scanner scan = new Scanner(file);
         //int listIndex = 0;
@@ -229,5 +278,22 @@ public class Input {
         }
         
         scan.close();
+    }
+    
+    /**
+     * static helper method which outputs the
+     * given data
+     * @param list -list to prind data of
+     */
+    public static void printData(SortedList<Song> list) {
+        Iterator<Song> it = list.iterator();
+        while (it.hasNext()) {
+            Song song = it.next();
+            System.out.println("Song Title: " + song.getTitle());
+            System.out.println("Song Artist: " + song.getArtist());
+            System.out.println("Song Genre: " + song.getGenre());
+            System.out.println("Song Year: " + song.getReleaseYear());
+            System.out.println(song.representHobbies() + "\n");
+        }
     }
 }

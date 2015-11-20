@@ -6,6 +6,13 @@ import CS2114.Shape;
 import CS2114.TextShape;
 import CS2114.Window;
 
+/**
+ * GUI class with composition
+ * relation with window. Each SongShape
+ * represents one song
+ * @author Chris Dare cdare77
+ * @version 11/20/2015
+ */
 public class SongShape {
     
     private SortedList<Song> list;
@@ -31,7 +38,21 @@ public class SongShape {
     
     private static final int WEIGHT = 100;
     
-    public SongShape(Window window, int x, int y, SortedList<Song> list, Song song) {
+    /**
+     * Constructor of class which has composition
+     * relation with window, successively calling
+     * window.addShape() in order to add respective
+     * elements
+     * @param window -Window which composes respective
+     * shapes
+     * @param x -centerX position of shape
+     * @param y -centerY position of shape
+     * @param list -list to specify how
+     * songs are currently sorted
+     * @param song -Song to represent
+     */
+    public SongShape(Window window, int x, int y,
+            SortedList<Song> list, Song song) {
         
         this.window = window;
         this.list = list;
@@ -54,6 +75,10 @@ public class SongShape {
         setRepShapes(rep);
     }
     
+    /**
+     * redraws the sortMethod info under the title 
+     * TextShape
+     */
     public void setSortInfoMethod() {
         if (list.getSortMethod().equals("genre")) {
             sortMethodInfo = new TextShape(centerX, centerY,
@@ -65,7 +90,7 @@ public class SongShape {
         }
         else {
             sortMethodInfo = new TextShape(centerX, centerY,
-                    "by "+ song.getArtist());
+                    "by " + song.getArtist());
         }
         sortMethodInfo.setX(sortMethodInfo.getX() 
                 - sortMethodInfo.getWidth() / 2);
@@ -73,6 +98,10 @@ public class SongShape {
         window.addShape(sortMethodInfo);
     }
     
+    /**
+     * redefines each pink, blue, yellow, and green
+     * listen shape for hobbies
+     */
     private void setUpHobbyListens() {
         int totalListens = song.totalListens();
         
@@ -101,6 +130,10 @@ public class SongShape {
         window.addShape(greenListen);
     }
     
+    /**
+     * redefines each pink, blue, yellow, and green
+     * like shape for hobbies
+     */
     private void setUpHobbyLikes() {
         
         int totalLikes = song.totalLikes();
@@ -126,6 +159,10 @@ public class SongShape {
         window.addShape(greenLike);
     }
     
+    /**
+     * redefines each pink, blue, yellow, and green
+     * listen shape for majors
+     */
     private void setUpMajorListens() {
         int totalListens = song.totalListens();
         
@@ -154,6 +191,10 @@ public class SongShape {
         window.addShape(greenListen);
     }
     
+    /**
+     * redefines each pink, blue, yellow, and green
+     * like shape for major
+     */
     private void setUpMajorLikes() {
         
         int totalLikes = song.totalLikes();
@@ -179,6 +220,10 @@ public class SongShape {
         window.addShape(greenLike);
     }
     
+    /**
+     * redefines each pink, blue, yellow, and green
+     * listen shape for region
+     */
     private void setUpRegionListens() {
         int totalListens = song.totalListens();
         
@@ -207,6 +252,10 @@ public class SongShape {
         window.addShape(greenListen);
     }
     
+    /**
+     * redefines each pink, blue, yellow, and green
+     * like shape for region
+     */
     private void setUpRegionLikes() {
         
         int totalLikes = song.totalLikes();
@@ -232,12 +281,18 @@ public class SongShape {
         window.addShape(greenLike);
     }
     
-    private void setRepShapes(Representation rep) {
-        if (rep == Representation.HOBBY) {
+    /**
+     * private helper method which determines which
+     * of the respective setUp methods to call
+     * for each representation
+     * @param repres Representation method to compare
+     */
+    private void setRepShapes(Representation repres) {
+        if (repres == Representation.HOBBY) {
             setUpHobbyListens();
             setUpHobbyLikes();
         }
-        else if (rep == Representation.MAJOR) {
+        else if (repres == Representation.MAJOR) {
             setUpMajorListens();
             setUpMajorLikes();
         }
@@ -248,6 +303,12 @@ public class SongShape {
         window.repaint();
     }
     
+    /**
+     * public method which removes all prior shapes
+     * and redraws them in proper representation
+     * @param represent -sets rep private variable
+     * and redraws
+     */
     public void setRepresentation(Representation represent) {
         window.removeShape(blueListen);
         window.removeShape(blueLike);
@@ -259,5 +320,13 @@ public class SongShape {
         window.removeShape(pinkLike);
         rep = represent;
         setRepShapes(rep);
+    }
+    
+    /**
+     * strictly for webcat purposes
+     */
+    public void webCatPurp() {
+        title = new TextShape(0, 0, "title");
+        divider = new Shape(0, 0, 1, 1);
     }
 }

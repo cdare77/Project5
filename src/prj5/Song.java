@@ -4,26 +4,77 @@ package prj5;
  * @author Chris Dare cdare77
  * @version 11/8/2105
  */
-@SuppressWarnings("unused")
 public class Song implements MusicComparable<Song> {
+ 
     
+//-------------VARIABLES-------------
     private String title;
     private String artist;
     private String genre;
     private int releaseYear;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData read;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData art;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData sports;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData music;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData compSci;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData enge;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData math;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData other;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData nEast;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData sEast;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData otherStates;
+    /**
+     * package protected for readibility 
+     * and protection of call stack
+     */
     SongData foreign;
+
     
+//-------------METHODS-----------------------------
     /**
      * Constructor for song
      * @param title of song
@@ -41,47 +92,47 @@ public class Song implements MusicComparable<Song> {
     
     /**
      * sets the data for hobbies
-     * @param read hobby's SongData
-     * @param art hobby's SongData
-     * @param sports hobby's SongData
-     * @param music hobby's SongData
+     * @param readV hobby's SongData
+     * @param artV hobby's SongData
+     * @param sportsV hobby's SongData
+     * @param musicV hobby's SongData
      */
-    public void setHobbyData(SongData read, SongData art,
-            SongData sports, SongData music) {
-        this.read = read;
-        this.art = art;
-        this.sports = sports;
-        this.music = music;
+    public void setHobbyData(SongData readV, SongData artV,
+            SongData sportsV, SongData musicV) {
+        this.read = readV;
+        this.art = artV;
+        this.sports = sportsV;
+        this.music = musicV;
     }
     
     /**
      * sets the data for majors
-     * @param compSci major's SongData
-     * @param enge major's SongData
-     * @param math major's SongData
-     * @param other major's SongData
+     * @param compSciV major's SongData
+     * @param engeV major's SongData
+     * @param mathV major's SongData
+     * @param otherV major's SongData
      */
-    public void setMajorData(SongData compSci, SongData enge,
-            SongData math, SongData other) {
-        this.compSci = compSci;
-        this.enge = enge;
-        this.math = math;
-        this.other = other;
+    public void setMajorData(SongData compSciV, SongData engeV,
+            SongData mathV, SongData otherV) {
+        this.compSci = compSciV;
+        this.enge = engeV;
+        this.math = mathV;
+        this.other = otherV;
     }
     
     /**
      * sets the regional data for students
-     * @param nEast regional SongData
-     * @param sEast regional SongData
-     * @param otherStates regional SongData
-     * @param foreign regional songData
+     * @param nEastV regional SongData
+     * @param sEastV regional SongData
+     * @param otherStatesV regional SongData
+     * @param foreignV regional songData
      */
-    public void setRegionData(SongData nEast, SongData sEast,
-            SongData otherStates, SongData foreign) {
-        this.nEast = nEast;
-        this.sEast = sEast;
-        this.otherStates = otherStates;
-        this.foreign = foreign;
+    public void setRegionData(SongData nEastV, SongData sEastV,
+            SongData otherStatesV, SongData foreignV) {
+        this.nEast = nEastV;
+        this.sEast = sEastV;
+        this.otherStates = otherStatesV;
+        this.foreign = foreignV;
     }
     
     /**
@@ -135,23 +186,23 @@ public class Song implements MusicComparable<Song> {
     }
     
     @Override
-    public int compareByArtist(Song other) {
-        return artist.compareTo(other.getArtist());
+    public int compareByArtist(Song otherSong) {
+        return artist.compareTo(otherSong.getArtist());
     }
     
     @Override
-    public int compareByTitle(Song other) {
-        return title.compareTo(other.getTitle());
+    public int compareByTitle(Song otherSong) {
+        return title.compareTo(otherSong.getTitle());
     }
     
     @Override
-    public int compareByGenre(Song other) {
-        return genre.compareTo(other.getGenre());
+    public int compareByGenre(Song otherSong) {
+        return genre.compareTo(otherSong.getGenre());
     }
     
     @Override
-    public int compareByReleaseYear(Song other) {
-        return releaseYear - other.getReleaseYear();
+    public int compareByReleaseYear(Song otherSong) {
+        return releaseYear - otherSong.getReleaseYear();
     }
     
     @Override
@@ -165,6 +216,35 @@ public class Song implements MusicComparable<Song> {
         builder.append(releaseYear);
         builder.append("), Genre: ");
         builder.append(genre);
+        return builder.toString();
+    }
+    
+    /**
+     * provides a helper method to access
+     * data for SurveyData of specifically
+     * hobbies
+     * @return String representing song
+     */
+    public String representHobbies() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Heard\n");
+        builder.append("reading:");
+        builder.append(read.listens);
+        builder.append(" art:");
+        builder.append(art.listens);
+        builder.append(" sports:");
+        builder.append(sports.listens);
+        builder.append(" music:");
+        builder.append(music.listens);
+        builder.append("\nLikes\n");
+        builder.append("reading:");
+        builder.append(read.likes);
+        builder.append(" art:");
+        builder.append(art.likes);
+        builder.append(" sports:");
+        builder.append(sports.likes);
+        builder.append(" music:");
+        builder.append(music.likes);
         return builder.toString();
     }
     

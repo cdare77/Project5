@@ -16,6 +16,10 @@ public class LinkedListTest extends student.TestCase {
         list = new LinkedList<String>();
     }
     
+    /**
+     * Tests the add method and exceptions 
+     * which may be thrown
+     */
     @SuppressWarnings("deprecation")
     public void testAdd() {
         
@@ -115,6 +119,10 @@ public class LinkedListTest extends student.TestCase {
         assertTrue(ex instanceof IndexOutOfBoundsException);
     }
     
+    /**
+     * Tests the getIndexOf method, in cases
+     * that object is contained and not contained
+     */
     @SuppressWarnings("deprecation")
     public void testGetIndexOf() {
         list.add("A");
@@ -158,6 +166,10 @@ public class LinkedListTest extends student.TestCase {
         assertEquals(list.toString(), "[B]");
     }
     
+    /**
+     * Tests the remove method and all
+     * exceptions which may be thrown
+     */
     public void testRemove() {
         list.add("A");
         list.add("F");
@@ -204,6 +216,10 @@ public class LinkedListTest extends student.TestCase {
         assertFalse(list.remove("L"));   
     }
     
+    /**
+     * Tests the iterator to assert all
+     * elements are accessed
+     */
     public void testIterator() {
         list.add("A");
         list.add("F");
@@ -225,22 +241,28 @@ public class LinkedListTest extends student.TestCase {
             index++;
         }
         
-        String[] otherStrings = {"A","F", "B", "R", "L", "Q", "H", 
-                "I","Z", "C"};
+        String[] otherStrings = {"A", "F", "B", "R", "L", "Q", "H", 
+            "I", "Z", "C"};
         
         assertTrue(Arrays.equals(strings, otherStrings));
     }
     
+    /**
+     * Tests the toArray method
+     */
     public void testToArray() {
         list.add("A");
         list.add("B");
         list.add("C");
         
-        Object[] other = {"A","B","C"};
+        Object[] other = {"A", "B", "C"};
         
         assertTrue(Arrays.equals(list.toArray(), other));
     }
     
+    /**
+     * Tests both cases of the contains boolean
+     */
     public void testContains() {
         list.add("A");
         list.add("B");
@@ -248,8 +270,22 @@ public class LinkedListTest extends student.TestCase {
         
         assertTrue(list.contains("A"));
         assertFalse(list.contains("F"));
+        
+        Exception ex = null;
+        try {
+            list.contains(null);
+        }
+        catch (Exception e) {
+            ex = e;
+        }
+        assertTrue(ex instanceof IllegalArgumentException);
     }
     
+    /**
+     * Tests the toString method of 
+     * both a nonempty list and empty
+     * list
+     */
     public void testToString() {
         list.add("A");
         list.add("B");

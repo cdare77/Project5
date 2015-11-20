@@ -82,6 +82,7 @@ public class SortedListTest extends TestCase {
      * Tests the compare method for several 
      * sort methods
      */
+    @SuppressWarnings("deprecation")
     public void testCompare() {
         assertTrue(list.compare(dontStopBelievin, livinOnAPrayer) < 0);
         
@@ -91,7 +92,7 @@ public class SortedListTest extends TestCase {
         
         list.setSortMethod("genre");
         
-        assertTrue(list.compare(dontStopBelievin, livinOnAPrayer) == 0);
+        assertEquals(list.compare(dontStopBelievin, livinOnAPrayer), 0);
         
         list.setSortMethod("releaseYear");
         
@@ -101,6 +102,7 @@ public class SortedListTest extends TestCase {
     
     /**
      * Tests setSortMethod() and passively tests sort 
+     * and each respective private helper method
      */
     public void testSetSortMethod() {
         list.add(redemptionSong);
@@ -149,6 +151,34 @@ public class SortedListTest extends TestCase {
                 + "Genre: Jazz, \"Our Song\", Taylor Swift (2006),"
                 + " Genre: Pop, \"Redemption Song\", Bob Marley"
                 + " (1976), Genre: Reggae]");
+        
+        Exception ex = null;
+        try {
+            list.setSortMethod("foo");
+        }
+        catch (Exception e) {
+            ex = e;
+        }
+        assertTrue(ex instanceof IllegalArgumentException);
+    }
+    
+    /**
+     * tests the getSortMethod for each case
+     */
+    public void testGetSortMethod() {
+        assertEquals(list.getSortMethod(), "title");
+        
+        list.setSortMethod("genre");
+        
+        assertEquals(list.getSortMethod(), "genre");
+        
+        list.setSortMethod("artist");
+        
+        assertEquals(list.getSortMethod(), "artist");
+        
+        list.setSortMethod("releaseYear");
+        
+        assertEquals(list.getSortMethod(), "releaseYear");
     }
 
 }

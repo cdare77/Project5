@@ -7,7 +7,13 @@ package prj5;
  * @param <E>
  */
 class Node<E> {
+    /**
+     * package protected data variable
+     */
     E data;
+    /**
+     * package protected nextNode variable
+     */
     Node<E> next;
     
     /**
