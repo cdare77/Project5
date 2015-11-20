@@ -11,18 +11,18 @@ public class Song implements MusicComparable<Song> {
     private String artist;
     private String genre;
     private int releaseYear;
-    private SongData read;
-    private SongData art;
-    private SongData sports;
-    private SongData music;
-    private SongData compSci;
-    private SongData enge;
-    private SongData math;
-    private SongData other;
-    private SongData nEast;
-    private SongData sEast;
-    private SongData otherStates;
-    private SongData foreign;
+    SongData read;
+    SongData art;
+    SongData sports;
+    SongData music;
+    SongData compSci;
+    SongData enge;
+    SongData math;
+    SongData other;
+    SongData nEast;
+    SongData sEast;
+    SongData otherStates;
+    SongData foreign;
     
     /**
      * Constructor for song
@@ -166,22 +166,6 @@ public class Song implements MusicComparable<Song> {
         builder.append("), Genre: ");
         builder.append(genre);
         return builder.toString();
-    }
-    
-    public SongData getRead() {
-        return read;
-    }
-    
-    public SongData getArt() {
-        return art;
-    }
-    
-    public SongData getSports() {
-        return sports;
-    }
-    
-    public SongData getMusic() {
-        return music;
     }
     
 }
