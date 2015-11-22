@@ -17,11 +17,28 @@ final class SongData implements Comparable<SongData> {
     /**
      * should be package protected so other
      * classes can easily access and modify
-     * without stree on the function stack
+     * without stress on the function stack
      * from accessor and modifier methods
      */
     int likes;
     
+    /**
+     * should be package protected so other
+     * classes can easily access and modify
+     * wthiout stress on the function
+     * stack from accessor and modifier
+     * methods
+     */
+    int total;
+    
+    /**
+     * should be package protected so other
+     * classes can easily access and modify
+     * wthiout stress on the function
+     * stack from accessor and modifier
+     * methods
+     */
+    int totalLikes;
     /**
      * constructor which assigns values
      * to listens and likes
@@ -30,7 +47,9 @@ final class SongData implements Comparable<SongData> {
      */
     SongData(int list, int like) {
         this.listens = list;
-        this.likes = like;  
+        this.likes = like;
+        this.total = 0;
+        this.totalLikes = 0;
     }
     
     @Override

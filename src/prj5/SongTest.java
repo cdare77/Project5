@@ -121,8 +121,32 @@ public class SongTest extends TestCase {
         mySong.setMajorData(new SongData(1, 1),
                 new SongData(2, 2), new SongData(3, 3),
                 new SongData(4, 4));
-        assertEquals(mySong.representHobbies(), "Heard\nreading:1"
-                + " art:2 sports:3 music:4\nLikes\nreading:1 art:2 "
-                + "sports:3 music:4");
+        mySong.art.total = 2;
+        mySong.art.totalLikes = 2;
+        mySong.sports.total = 3;
+        mySong.sports.totalLikes = 3;
+        mySong.music.total = 4;
+        mySong.music.totalLikes = 4;
+        mySong.read.total = 1;
+        mySong.read.totalLikes = 1;
+        
+        assertEquals(mySong.representHobbies(), "Heard"
+                + "\nreading:100 art:100 sports:100"
+                + " music:100\nLikes\nreading:100"
+                + " art:100 sports:100 music:100");
+        
+        mySong.art.total = 0;
+        mySong.art.totalLikes = 0;
+        mySong.sports.total = 0;
+        mySong.sports.totalLikes = 0;
+        mySong.music.total = 0;
+        mySong.music.totalLikes = 0;
+        mySong.read.total = 0;
+        mySong.read.totalLikes = 0;
+        
+        assertEquals(mySong.representHobbies(), "Heard"
+                + "\nreading:0 art:0 sports:0"
+                + " music:0\nLikes\nreading:0"
+                + " art:0 sports:0 music:0");
     }
 }

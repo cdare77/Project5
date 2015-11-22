@@ -13,7 +13,7 @@ import CS2114.Window;
  * @author Chris Dare cdare77
  * @version 11/20/2015
  */
-public class SongShape {
+public class GUISongShape {
     
     private SortedList<Song> list;
     private Window window;
@@ -34,7 +34,7 @@ public class SongShape {
     private Shape greenLike;
     private Shape greenListen;
     
-    private Representation rep;
+    private GUIRepresentation rep;
     
     private static final int WEIGHT = 100;
     
@@ -51,7 +51,7 @@ public class SongShape {
      * songs are currently sorted
      * @param song -Song to represent
      */
-    public SongShape(Window window, int x, int y,
+    public GUISongShape(Window window, int x, int y,
             SortedList<Song> list, Song song) {
         
         this.window = window;
@@ -71,7 +71,7 @@ public class SongShape {
         divider = new Shape(x, y + 20, 5, 60, Color.BLACK);
         window.addShape(divider);
         
-        rep = Representation.HOBBY;
+        rep = GUIRepresentation.HOBBY;
         setRepShapes(rep);
     }
     
@@ -287,12 +287,12 @@ public class SongShape {
      * for each representation
      * @param repres Representation method to compare
      */
-    private void setRepShapes(Representation repres) {
-        if (repres == Representation.HOBBY) {
+    private void setRepShapes(GUIRepresentation repres) {
+        if (repres == GUIRepresentation.HOBBY) {
             setUpHobbyListens();
             setUpHobbyLikes();
         }
-        else if (repres == Representation.MAJOR) {
+        else if (repres == GUIRepresentation.MAJOR) {
             setUpMajorListens();
             setUpMajorLikes();
         }
@@ -309,7 +309,7 @@ public class SongShape {
      * @param represent -sets rep private variable
      * and redraws
      */
-    public void setRepresentation(Representation represent) {
+    public void setRepresentation(GUIRepresentation represent) {
         window.removeShape(blueListen);
         window.removeShape(blueLike);
         window.removeShape(yellowListen);

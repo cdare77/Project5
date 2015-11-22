@@ -174,11 +174,8 @@ public class SortedList<T extends MusicComparable<T>> extends LinkedList<T> {
         else if (sortMethod.equals("genre")) {
             compare = first.compareByGenre(second);
         }
-        else if (sortMethod.equals("releaseYear")) {
-            compare = first.compareByReleaseYear(second);
-        }
         else {
-            throw new IllegalArgumentException();
+            compare = first.compareByReleaseYear(second);
         }
         
         return compare;

@@ -10,7 +10,7 @@ import CS2114.WindowSide;
  * @author Chris Dare cdare77
  * @version 11/20/2015
  */
-public class DataVisualizationWindow {
+public class GUIDataVisualizationWindow {
 
     @SuppressWarnings("unused")
     private SortedList<Song> list;
@@ -26,19 +26,19 @@ public class DataVisualizationWindow {
     private Button repRegion;
     private Button quit;
     
-    private SongShape song1;
+    private GUISongShape song1;
     
     /**
      * Constructor for DataVisualizationWindow which
      * takes in a list to represent
      * @param list -List to represent
      */
-    public DataVisualizationWindow(SortedList<Song> list) {
+    public GUIDataVisualizationWindow(SortedList<Song> list) {
         this.list = list;
         window = new Window();
         window.setInfoText("Project 5");
         
-        song1 = new SongShape(window, 120, 80, list, list.get(0));
+        song1 = new GUISongShape(window, 120, 80, list, list.get(0));
         
         setUpButtons();
     }
@@ -139,7 +139,7 @@ public class DataVisualizationWindow {
      * @param button repMajor
      */
     public void clickedRepMajor(Button button) {
-        song1.setRepresentation(Representation.MAJOR);
+        song1.setRepresentation(GUIRepresentation.MAJOR);
     }
     
     /**
@@ -148,7 +148,7 @@ public class DataVisualizationWindow {
      * @param button repHobby
      */
     public void clickedRepHobby(Button button) {
-        song1.setRepresentation(Representation.HOBBY);
+        song1.setRepresentation(GUIRepresentation.HOBBY);
     }
     
     /**
@@ -156,6 +156,6 @@ public class DataVisualizationWindow {
      * @param button repRegion
      */
     public void clickedRepRegion(Button button) {
-        song1.setRepresentation(Representation.REGION);
+        song1.setRepresentation(GUIRepresentation.REGION);
     }
 }

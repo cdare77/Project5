@@ -65,12 +65,13 @@ public class Input {
             e.printStackTrace();
         }
         
-        printData(list);
         list.setSortMethod("genre");
+        printData(list);
+        list.setSortMethod("title");
         printData(list);
         
         @SuppressWarnings("unused")
-        DataVisualizationWindow window = new DataVisualizationWindow(list);
+        GUIDataVisualizationWindow window = new GUIDataVisualizationWindow(list);
     }
     
     /**
@@ -122,6 +123,7 @@ public class Input {
                 String region = values[3];
                 String hobby = values[4];
                 
+                
                 for (int i = 5; i < values.length; i++) {
                     Song song = list.get((i - 5) / 2);
                     int isLike = (i - 5) % 2;
@@ -130,22 +132,35 @@ public class Input {
                             if (values[i].equals("Yes")) {
                                 song.compSci.listens++;
                             }
+                            if (!values[i].equals("")) {
+                                song.compSci.total++;
+                            }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.compSci.likes++;
                             }
+                            if (!values[i].equals("")) {
+                            	song.compSci.totalLikes++;
+                            }
                         }
+                        
                     }
                     else if (major.equals("Other Engineering")) {
                         if (isLike == 0) {
                             if (values[i].equals("Yes")) {
                                 song.enge.listens++;
                             }
+                            if (!values[i].equals("")) {
+                                song.enge.total++;
+                            }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.enge.likes++;
+                            }
+                            if (!values[i].equals("")) {
+                            	song.enge.totalLikes++;
                             }
                         }
                     }
@@ -154,10 +169,16 @@ public class Input {
                             if (values[i].equals("Yes")) {
                                 song.math.listens++;
                             }
+                            if (!values[i].equals("")) {
+                                song.math.total++;
+                            }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.math.likes++;
+                            }
+                            if (!values[i].equals("")) {
+                            	song.math.totalLikes++;
                             }
                         }
                     }
@@ -166,10 +187,16 @@ public class Input {
                             if (values[i].equals("Yes")) {
                                 song.other.listens++;
                             }
+                            if (!values[i].equals("")) {
+                                song.other.total++;
+                            }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.other.likes++;
+                            }
+                            if (!values[i].equals("")) {
+                            	song.other.totalLikes++;
                             }
                         }
                     }
@@ -179,10 +206,16 @@ public class Input {
                             if (values[i].equals("Yes")) {
                                 song.read.listens++;
                             }
+                            if (!values[i].equals("")) {
+                            	song.read.total++;
+                            }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.read.likes++;
+                            }
+                            if (!values[i].equals("")) {
+                            	song.read.totalLikes++;
                             }
                         }
                     }
@@ -191,10 +224,18 @@ public class Input {
                             if (values[i].equals("Yes")) {
                                 song.sports.listens++;
                             }
+                            
+                            if (!values[i].equals("")) {
+                                song.sports.total++;
+                            }
+                            
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.sports.likes++;
+                            }
+                            if (!values[i].equals("")) {
+                            	song.sports.totalLikes++;
                             }
                         }
                     }
@@ -203,22 +244,34 @@ public class Input {
                             if (values[i].equals("Yes")) {
                                 song.music.listens++;
                             }
+                            if (!values[i].equals("")) {
+                                song.music.total++;
+                            }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.music.likes++;
                             }
+                            if (!values[i].equals("")) {
+                            	song.music.totalLikes++;
+                            }
                         }
                     }
-                    else {
+                    else if (hobby.equals("art")) {
                         if (isLike == 0) {
                             if (values[i].equals("Yes")) {
                                 song.art.listens++;
+                            }
+                            if (!values[i].equals("")) {
+                                song.art.total++;
                             }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.art.likes++;
+                            }
+                            if (!values[i].equals("")) {
+                            	song.art.totalLikes++;
                             }
                         }
                     }
@@ -227,10 +280,16 @@ public class Input {
                             if (values[i].equals("Yes")) {
                                 song.sEast.listens++;
                             }
+                            if (!values[i].equals("")) {
+                                song.sEast.total++;
+                            }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.sEast.likes++;
+                            }
+                            if (!values[i].equals("")) {
+                            	song.sEast.totalLikes++;
                             }
                         }
                     }
@@ -239,10 +298,16 @@ public class Input {
                             if (values[i].equals("Yes")) {
                                 song.nEast.listens++;
                             }
+                            if (!values[i].equals("")) {
+                                song.nEast.total++;
+                            }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.nEast.likes++;
+                            }
+                            if (!values[i].equals("")) {
+                            	song.nEast.totalLikes++;
                             }
                         }
                     }
@@ -251,10 +316,16 @@ public class Input {
                             if (values[i].equals("Yes")) {
                                 song.foreign.listens++;
                             }
+                            if (!values[i].equals("")) {
+                                song.foreign.total++;
+                            }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.foreign.likes++;
+                            }
+                            if (!values[i].equals("")) {
+                            	song.foreign.totalLikes++;
                             }
                         }
                     }
@@ -263,10 +334,16 @@ public class Input {
                             if (values[i].equals("Yes")) {
                                 song.otherStates.listens++;
                             }
+                            if (!values[i].equals("")) {
+                                song.otherStates.total++;
+                            }
                         }
                         else {
                             if (values[i].equals("Yes")) {
                                 song.otherStates.likes++;
+                            }
+                            if (!values[i].equals("")) {
+                            	song.otherStates.totalLikes++;
                             }
                         }
                     }
@@ -283,7 +360,7 @@ public class Input {
     /**
      * static helper method which outputs the
      * given data
-     * @param list -list to prind data of
+     * @param list -list to print data of
      */
     public static void printData(SortedList<Song> list) {
         Iterator<Song> it = list.iterator();

@@ -12,7 +12,7 @@ package prj5;
  * @author Chris Dare cdare77
  * @version 11/18/2015
  */
-public enum Representation {
+public enum GUIRepresentation {
     /**
      * public static finals which constrict possibilities
      * to only 3 options and prevent IllegalArgumentException

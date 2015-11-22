@@ -229,22 +229,62 @@ public class Song implements MusicComparable<Song> {
         StringBuilder builder = new StringBuilder();
         builder.append("Heard\n");
         builder.append("reading:");
-        builder.append(read.listens);
+        if (read.total ==  0) {
+            builder.append(0);
+        }
+        else {
+            builder.append(100 * read.listens / read.total);
+        }
         builder.append(" art:");
-        builder.append(art.listens);
+        if (art.total == 0) {
+            builder.append(0);
+        }
+        else {
+            builder.append(100 * art.listens / art.total);
+        }
         builder.append(" sports:");
-        builder.append(sports.listens);
+        if (sports.total == 0) {
+            builder.append(0);
+        }
+        else {
+            builder.append(100 * sports.listens / sports.total);
+        }
         builder.append(" music:");
-        builder.append(music.listens);
+        if (music.total == 0) {
+            builder.append(0);
+        }
+        else {
+            builder.append(100 * music.listens / music.total);
+        }
         builder.append("\nLikes\n");
         builder.append("reading:");
-        builder.append(read.likes);
+        if (read.totalLikes == 0) {
+            builder.append(0);
+        }
+        else {
+            builder.append(100 * read.likes / read.totalLikes);
+        }
         builder.append(" art:");
-        builder.append(art.likes);
+        if (art.totalLikes == 0) {
+            builder.append(0);
+        }
+        else {
+            builder.append(100 * art.likes / art.totalLikes);
+        }
         builder.append(" sports:");
-        builder.append(sports.likes);
+        if (sports.totalLikes == 0) {
+            builder.append(0);
+        }
+        else {
+            builder.append(100 * sports.likes / sports.totalLikes);
+        }
         builder.append(" music:");
-        builder.append(music.likes);
+        if (music.totalLikes == 0) {
+            builder.append(0);
+        }
+        else {
+            builder.append(100 * music.likes / music.totalLikes);
+        }
         return builder.toString();
     }
     
