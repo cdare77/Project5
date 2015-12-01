@@ -66,9 +66,13 @@ public class GUISongShape {
         title.setX(title.getX() - title.getWidth() / 2);
         window.addShape(title);
         
+        sortMethodInfo = new TextShape(centerX, centerY,
+                "by " + song.getArtist());
+        window.addShape(sortMethodInfo);
         this.setSortInfoMethod();
-
+        
         divider = new Shape(x, y + 20, 5, 60, Color.BLACK);
+        
         window.addShape(divider);
         
         rep = GUIRepresentation.HOBBY;
@@ -80,6 +84,7 @@ public class GUISongShape {
      * TextShape
      */
     public void setSortInfoMethod() {
+        window.removeShape(sortMethodInfo);
         if (list.getSortMethod().equals("genre")) {
             sortMethodInfo = new TextShape(centerX, centerY,
                     "genre: " + song.getGenre());
@@ -103,29 +108,54 @@ public class GUISongShape {
      * listen shape for hobbies
      */
     private void setUpHobbyListens() {
-        int totalListens = song.totalListens();
+        int blueWeight;
+        int pinkWeight;
+        int yellowWeight;
+        int greenWeight;
         
+        if (song.read.total == 0) {
+            pinkWeight = 0;
+        }
+        else {
+            pinkWeight = WEIGHT * song.read.listens / song.read.total;
+        }
+
         pinkListen = new Shape(centerX, centerY + 20,
-                WEIGHT * song.read.listens / totalListens,
-                15, new Color(255, 20, 147));
+                pinkWeight, 15, new Color(255, 20, 147));
         pinkListen.setX(pinkListen.getX() - pinkListen.getWidth());
         window.addShape(pinkListen);
         
+
+        if (song.art.total == 0) {
+            blueWeight = 0;
+        }
+        else {
+            blueWeight = WEIGHT * song.art.listens / song.art.total;
+        }
         blueListen = new Shape(centerX, centerY + 35,
-                WEIGHT * song.art.listens / totalListens,
-                15, Color.BLUE);
+                blueWeight, 15, Color.BLUE);
         blueListen.setX(blueListen.getX() - blueListen.getWidth());
         window.addShape(blueListen);
         
+        if (song.sports.total == 0) {
+            yellowWeight = 0;
+        }
+        else {
+            yellowWeight = WEIGHT * song.sports.listens / song.sports.total;
+        }
         yellowListen = new Shape(centerX, centerY + 50,
-                WEIGHT * song.sports.listens / totalListens,
-                15, Color.YELLOW);
+                yellowWeight, 15, Color.YELLOW.darker());
         yellowListen.setX(yellowListen.getX() - yellowListen.getWidth());
         window.addShape(yellowListen);
         
+        if (song.music.total == 0) {
+            greenWeight = 0;
+        }
+        else {
+            greenWeight = WEIGHT * song.music.listens / song.music.total;
+        }
         greenListen = new Shape(centerX, centerY + 65,
-                WEIGHT * song.music.listens / totalListens,
-                15, Color.GREEN.darker());
+                greenWeight, 15, Color.GREEN.darker());
         greenListen.setX(greenListen.getX() - greenListen.getWidth());
         window.addShape(greenListen);
     }
@@ -135,27 +165,49 @@ public class GUISongShape {
      * like shape for hobbies
      */
     private void setUpHobbyLikes() {
+        int blueWeight;
+        int pinkWeight;
+        int yellowWeight;
+        int greenWeight;
         
-        int totalLikes = song.totalLikes();
-        
+        if (song.read.totalLikes == 0) {
+            pinkWeight = 0;
+        }
+        else {
+            pinkWeight = WEIGHT * song.read.likes / song.read.totalLikes;
+        }
         pinkLike = new Shape(centerX, centerY + 20,
-                WEIGHT * song.read.likes / totalLikes,
-                15, new Color(255, 20, 147));
+                pinkWeight, 15, new Color(255, 20, 147));
         window.addShape(pinkLike);
         
+        if (song.art.totalLikes == 0) {
+            blueWeight = 0;
+        }
+        else {
+            blueWeight = WEIGHT * song.art.likes / song.art.totalLikes;
+        }
         blueLike = new Shape(centerX, centerY + 35,
-                WEIGHT * song.art.likes / totalLikes,
-                15, Color.BLUE);
+                blueWeight, 15, Color.BLUE);
         window.addShape(blueLike);
         
+        if (song.sports.totalLikes == 0) {
+            yellowWeight = 0;
+        }
+        else {
+            yellowWeight = WEIGHT * song.sports.likes / song.sports.totalLikes;
+        }
         yellowLike = new Shape(centerX, centerY + 50,
-                WEIGHT * song.sports.likes / totalLikes,
-                15, Color.YELLOW);
+                yellowWeight, 15, Color.YELLOW.darker());
         window.addShape(yellowLike);
         
+        if (song.music.totalLikes == 0) {
+            greenWeight = 0;
+        }
+        else {
+            greenWeight = WEIGHT * song.music.likes / song.music.totalLikes;
+        }
         greenLike = new Shape(centerX, centerY + 65,
-                WEIGHT * song.music.likes / totalLikes,
-                15, Color.GREEN.darker());
+                greenWeight, 15, Color.GREEN.darker());
         window.addShape(greenLike);
     }
     
@@ -164,29 +216,54 @@ public class GUISongShape {
      * listen shape for majors
      */
     private void setUpMajorListens() {
-        int totalListens = song.totalListens();
+        int blueWeight;
+        int pinkWeight;
+        int yellowWeight;
+        int greenWeight;
         
+        if (song.compSci.total == 0) {
+            pinkWeight = 0;
+        }
+        else {
+            pinkWeight = WEIGHT * song.compSci.listens / song.compSci.total;
+        }
+
         pinkListen = new Shape(centerX, centerY + 20,
-                WEIGHT * song.compSci.listens / totalListens,
-                15, new Color(255, 20, 147));
+                pinkWeight, 15, new Color(255, 20, 147));
         pinkListen.setX(pinkListen.getX() - pinkListen.getWidth());
         window.addShape(pinkListen);
         
+
+        if (song.enge.total == 0) {
+            blueWeight = 0;
+        }
+        else {
+            blueWeight = WEIGHT * song.enge.listens / song.enge.total;
+        }
         blueListen = new Shape(centerX, centerY + 35,
-                WEIGHT * song.enge.listens / totalListens,
-                15, Color.BLUE);
+                blueWeight, 15, Color.BLUE);
         blueListen.setX(blueListen.getX() - blueListen.getWidth());
         window.addShape(blueListen);
         
+        if (song.math.total == 0) {
+            yellowWeight = 0;
+        }
+        else {
+            yellowWeight = WEIGHT * song.math.listens / song.math.total;
+        }
         yellowListen = new Shape(centerX, centerY + 50,
-                WEIGHT * song.math.listens / totalListens,
-                15, Color.YELLOW);
+                yellowWeight, 15, Color.YELLOW.darker());
         yellowListen.setX(yellowListen.getX() - yellowListen.getWidth());
         window.addShape(yellowListen);
         
+        if (song.other.total == 0) {
+            greenWeight = 0;
+        }
+        else {
+            greenWeight = WEIGHT * song.other.listens / song.other.total;
+        }
         greenListen = new Shape(centerX, centerY + 65,
-                WEIGHT * song.other.listens / totalListens,
-                15, Color.GREEN.darker());
+                greenWeight, 15, Color.GREEN.darker());
         greenListen.setX(greenListen.getX() - greenListen.getWidth());
         window.addShape(greenListen);
     }
@@ -196,27 +273,49 @@ public class GUISongShape {
      * like shape for major
      */
     private void setUpMajorLikes() {
+        int blueWeight;
+        int pinkWeight;
+        int yellowWeight;
+        int greenWeight;
         
-        int totalLikes = song.totalLikes();
-        
+        if (song.compSci.totalLikes == 0) {
+            pinkWeight = 0;
+        }
+        else {
+            pinkWeight = WEIGHT * song.compSci.likes / song.compSci.totalLikes;
+        }
         pinkLike = new Shape(centerX, centerY + 20,
-                WEIGHT * song.compSci.likes / totalLikes,
-                15, new Color(255, 20, 147));
+                pinkWeight, 15, new Color(255, 20, 147));
         window.addShape(pinkLike);
         
+        if (song.enge.totalLikes == 0) {
+            blueWeight = 0;
+        }
+        else {
+            blueWeight = WEIGHT * song.enge.likes / song.enge.totalLikes;
+        }
         blueLike = new Shape(centerX, centerY + 35,
-                WEIGHT * song.enge.likes / totalLikes,
-                15, Color.BLUE);
+                blueWeight, 15, Color.BLUE);
         window.addShape(blueLike);
         
+        if (song.math.totalLikes == 0) {
+            yellowWeight = 0;
+        }
+        else {
+            yellowWeight = WEIGHT * song.math.likes / song.math.totalLikes;
+        }
         yellowLike = new Shape(centerX, centerY + 50,
-                WEIGHT * song.math.likes / totalLikes,
-                15, Color.YELLOW);
+                yellowWeight, 15, Color.YELLOW.darker());
         window.addShape(yellowLike);
         
+        if (song.other.totalLikes == 0) {
+            greenWeight = 0;
+        }
+        else {
+            greenWeight = WEIGHT * song.other.likes / song.other.totalLikes;
+        }
         greenLike = new Shape(centerX, centerY + 65,
-                WEIGHT * song.other.likes / totalLikes,
-                15, Color.GREEN.darker());
+                greenWeight, 15, Color.GREEN.darker());
         window.addShape(greenLike);
     }
     
@@ -225,29 +324,54 @@ public class GUISongShape {
      * listen shape for region
      */
     private void setUpRegionListens() {
-        int totalListens = song.totalListens();
+        int blueWeight;
+        int pinkWeight;
+        int yellowWeight;
+        int greenWeight;
         
+        if (song.sEast.total == 0) {
+            pinkWeight = 0;
+        }
+        else {
+            pinkWeight = WEIGHT * song.sEast.listens / song.sEast.total;
+        }
+
         pinkListen = new Shape(centerX, centerY + 20,
-                WEIGHT * song.sEast.listens / totalListens,
-                15, new Color(255, 20, 147));
+                pinkWeight, 15, new Color(255, 20, 147));
         pinkListen.setX(pinkListen.getX() - pinkListen.getWidth());
         window.addShape(pinkListen);
         
+
+        if (song.nEast.total == 0) {
+            blueWeight = 0;
+        }
+        else {
+            blueWeight = WEIGHT * song.nEast.listens / song.nEast.total;
+        }
         blueListen = new Shape(centerX, centerY + 35,
-                WEIGHT * song.nEast.listens / totalListens,
-                15, Color.BLUE);
+                blueWeight, 15, Color.BLUE);
         blueListen.setX(blueListen.getX() - blueListen.getWidth());
         window.addShape(blueListen);
         
+        if (song.otherStates.total == 0) {
+            yellowWeight = 0;
+        }
+        else {
+            yellowWeight = WEIGHT * song.otherStates.listens / song.otherStates.total;
+        }
         yellowListen = new Shape(centerX, centerY + 50,
-                WEIGHT * song.otherStates.listens / totalListens,
-                15, Color.YELLOW);
+                yellowWeight, 15, Color.YELLOW.darker());
         yellowListen.setX(yellowListen.getX() - yellowListen.getWidth());
         window.addShape(yellowListen);
         
+        if (song.foreign.total == 0) {
+            greenWeight = 0;
+        }
+        else {
+            greenWeight = WEIGHT * song.foreign.listens / song.foreign.total;
+        }
         greenListen = new Shape(centerX, centerY + 65,
-                WEIGHT * song.foreign.listens / totalListens,
-                15, Color.GREEN.darker());
+                greenWeight, 15, Color.GREEN.darker());
         greenListen.setX(greenListen.getX() - greenListen.getWidth());
         window.addShape(greenListen);
     }
@@ -258,26 +382,49 @@ public class GUISongShape {
      */
     private void setUpRegionLikes() {
         
-        int totalLikes = song.totalLikes();
+        int blueWeight;
+        int pinkWeight;
+        int yellowWeight;
+        int greenWeight;
         
+        if (song.sEast.totalLikes == 0) {
+            pinkWeight = 0;
+        }
+        else {
+            pinkWeight = WEIGHT * song.sEast.likes / song.sEast.totalLikes;
+        }
         pinkLike = new Shape(centerX, centerY + 20,
-                WEIGHT * song.sEast.likes / totalLikes,
-                15, new Color(255, 20, 147));
+                pinkWeight, 15, new Color(255, 20, 147));
         window.addShape(pinkLike);
         
+        if (song.nEast.totalLikes == 0) {
+            blueWeight = 0;
+        }
+        else {
+            blueWeight = WEIGHT * song.nEast.likes / song.nEast.totalLikes;
+        }
         blueLike = new Shape(centerX, centerY + 35,
-                WEIGHT * song.nEast.likes / totalLikes,
-                15, Color.BLUE);
+                blueWeight, 15, Color.BLUE);
         window.addShape(blueLike);
         
+        if (song.otherStates.totalLikes == 0) {
+            yellowWeight = 0;
+        }
+        else {
+            yellowWeight = WEIGHT * song.otherStates.likes / song.otherStates.totalLikes;
+        }
         yellowLike = new Shape(centerX, centerY + 50,
-                WEIGHT * song.otherStates.likes / totalLikes,
-                15, Color.YELLOW);
+                yellowWeight, 15, Color.YELLOW.darker());
         window.addShape(yellowLike);
         
+        if (song.foreign.totalLikes == 0) {
+            greenWeight = 0;
+        }
+        else {
+            greenWeight = WEIGHT * song.foreign.likes / song.foreign.totalLikes;
+        }
         greenLike = new Shape(centerX, centerY + 65,
-                WEIGHT * song.foreign.likes / totalLikes,
-                15, Color.GREEN.darker());
+                greenWeight, 15, Color.GREEN.darker());
         window.addShape(greenLike);
     }
     
@@ -323,10 +470,29 @@ public class GUISongShape {
     }
     
     /**
+     * Removes all the subcomponents that make up the shape
+     */
+    public void removeShape() {
+        window.removeShape(divider);
+        window.removeShape(sortMethodInfo);
+        window.removeShape(title);
+        window.removeShape(blueListen);
+        window.removeShape(blueLike);
+        window.removeShape(yellowListen);
+        window.removeShape(yellowLike);
+        window.removeShape(greenListen);
+        window.removeShape(greenLike);
+        window.removeShape(pinkListen);
+        window.removeShape(pinkLike);
+    }
+    
+    /**
      * strictly for webcat purposes
      */
     public void webCatPurp() {
         title = new TextShape(0, 0, "title");
         divider = new Shape(0, 0, 1, 1);
     }
+    
+
 }

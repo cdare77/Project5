@@ -106,9 +106,10 @@ public class Input {
      * @param list -list of songs to iterate
      * @throws FileNotFoundException
      */
-    public static void parseData(File file, SortedList<Song> list) throws FileNotFoundException {
+    public static void parseData(File file, SortedList<Song> list)
+            throws FileNotFoundException {
         Scanner scan = new Scanner(file);
-        //int listIndex = 0;
+
         while (scan.hasNextLine()) {
             String text = scan.nextLine();
             String[] values = text.split(",");
